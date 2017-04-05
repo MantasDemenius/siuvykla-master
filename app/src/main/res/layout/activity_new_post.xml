@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:hint="@string/operation_one_price">
-                <requestFocus />
+
             </EditText>
 
             <Space
@@ -99,12 +99,12 @@
                 android:layout_height="10dp" />
 
             <EditText
-                android:id="@+id/clothes_lenght"
+                android:id="@+id/clothes_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:hint="@string/operation_one_clothes_lenght">
-                <requestFocus />
+                android:hint="@string/operation_one_clothes_length">
+
             </EditText>
 
             <Space
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:hint="@string/operation_one_clothes_width">
-                <requestFocus />
+
             </EditText>
 
             <Space

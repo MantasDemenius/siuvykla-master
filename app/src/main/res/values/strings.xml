@@ -5,6 +5,7 @@
     <string name="login_label_logIn_button">Prisijungti</string>
     <string name="login_invalid_username">Blogai įvestas prisijungimo vardas</string>
     <string name="login_invalid_password">Blogai įvestas slaptažodis</string>
+    <string name="register_invalid_email">Blogai įvestas emailas</string>
     <string name="meniu_new_post_button">Naujas įrašas</string>
     <string name="meniu_search_button">Paieška</string>
     <string name="new_post_add_post">Pridėkite naują įrašą</string>
@@ -45,7 +46,7 @@
     <string name="operation_one_submit_button">Įrašyti</string>
     <string name="operation_one_order">Užsakymų kiekis</string>
     <string name="operation_one_price">Kaina</string>
-    <string name="operation_one_clothes_lenght">Drabužio ilgis</string>
+    <string name="operation_one_clothes_length">Drabužio ilgis</string>
     <string name="operation_one_clothes_width">Drabužio plotis</string>
     <string name="operation_one_error">Privalomas laukelis</string>
 </resources>

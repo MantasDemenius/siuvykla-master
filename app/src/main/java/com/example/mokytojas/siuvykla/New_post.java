@@ -22,8 +22,7 @@ public class New_post extends Activity {
 
     private Spinner clothes_type, gender, color, delivery;
     private Button submit_button;
-    private EditText order, price, clothes_lenght, clothes_width;
-    private String order_text, price_text, clothes_lenght_text, clothes_width_text;
+    private EditText order, price, clothes_length, clothes_width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,35 +43,45 @@ public class New_post extends Activity {
         submit_button = (Button) findViewById(R.id.operation_one_submit);
         order = (EditText) findViewById(R.id.order);
         price = (EditText) findViewById(R.id.price);
-        clothes_lenght = (EditText) findViewById(R.id.clothes_lenght);
+        clothes_length = (EditText) findViewById(R.id.clothes_length);
         clothes_width = (EditText) findViewById(R.id.clothes_width);
-
-        order_text = order.getText().toString();
-        price_text = price.getText().toString();
-        clothes_lenght_text = clothes_lenght.getText().toString();
-        clothes_width_text = clothes_lenght.getText().toString();
 
         order.setError(null);
         price.setError(null);
-        clothes_lenght.setError(null);
+        clothes_length.setError(null);
         clothes_width.setError(null);
-
 
         submit_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
+                String order_text = order.getText().toString();
+                String price_text = price.getText().toString();
+                String clothes_length_text = clothes_length.getText().toString();
+                String clothes_width_text = clothes_width.getText().toString();
+
+
             boolean cancel = false;
+            boolean show = true;
                 if (TextUtils.isEmpty(order_text)) {
                     order.setError(getString(R.string.operation_one_error));
-                } else if (TextUtils.isEmpty(price_text)) {
+                    show = false;
+                }
+                if (TextUtils.isEmpty(price_text)) {
                     price.setError(getString(R.string.operation_one_error));
-                } else if (TextUtils.isEmpty(clothes_lenght_text)){
-                    clothes_lenght.setError(getString(R.string.operation_one_error));
-                } else if (TextUtils.isEmpty(clothes_width_text)) {
+                    show = false;
+                }
+                if (TextUtils.isEmpty(clothes_length_text)){
+                    clothes_length.setError(getString(R.string.operation_one_error));
+                    show = false;
+                }
+                if (TextUtils.isEmpty(clothes_width_text)) {
                     clothes_width.setError(getString(R.string.operation_one_error));
-                }else {
+                    show = false;
+                }
+
+                if (show) {
                     Toast.makeText(New_post.this,
                             "Jūsų užsakymas: " +
                                     "\nDrabužio tipas : " + String.valueOf(clothes_type.getSelectedItem()) +
@@ -80,7 +89,7 @@ public class New_post extends Activity {
                                     "\nLytis : " + String.valueOf(gender.getSelectedItem()) +
                                     "\nKaina : " + String.valueOf(price.getText()) +
                                     "\nSpalva : " + String.valueOf(color.getSelectedItem()) +
-                                    "\nDrabužio ilgis : " + String.valueOf(clothes_lenght.getText()) +
+                                    "\nDrabužio ilgis : " + String.valueOf(clothes_length.getText()) +
                                     "\nDrabužio plotis : " + String.valueOf(clothes_width.getText()) +
                                     "\nPristatymas : " + String.valueOf(delivery.getSelectedItem()),
                             Toast.LENGTH_SHORT).show();
