@@ -69,7 +69,7 @@ public class RegisterActivity extends Activity {
                     cancel = true;
                 }
 
-                if (!isEmailValid(txt_email)) {
+                if (!IsEmailValid(txt_email)) {
                     register_email.setError(getString(R.string.register_invalid_email));
                     focusView = register_email;
                     cancel = true;
@@ -96,7 +96,7 @@ public class RegisterActivity extends Activity {
         return matcher.matches();
     }
 
-    public static boolean isEmailValid(String email) {
+    public static boolean IsEmailValid(String email) {
         boolean isValid = false;
 
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";

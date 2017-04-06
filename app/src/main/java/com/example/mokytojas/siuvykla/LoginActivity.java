@@ -15,8 +15,6 @@ public class LoginActivity extends Activity {
     private Button login_button, register_button;
     private EditText login_text, password_text;
 
-    private String username, password;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //kreipimasis i paveldimos klases metoda
