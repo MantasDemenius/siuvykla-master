@@ -14,8 +14,9 @@
     <string name="register_username">Jūsų slapyvardis</string>
     <string name="register_password">Jūsų slaptažodis</string>
     <string name="register_repeat_password">Pakartokite slaptažodį</string>
-    <string name="register_email">Įveskitę elektroninį paštą</string>
+    <string name="register_email">Įveskite elektroninį paštą</string>
     <string name="register_register_button">Užregistruoti</string>
+    <string name="register_password_re_error">Slaptažodžio patvirtinimas turi sutapti su slaptažodžiu</string>
     <string name="operation_one_type_of_clothes_name">Drabužio tipas</string>
     <string-array name="operation_one_type_of_clothes">
         <item>Palaidinė</item>

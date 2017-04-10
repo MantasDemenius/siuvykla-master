@@ -63,21 +63,32 @@ public class RegisterActivity extends Activity {
                     cancel = true;
                 }
 
-                if (!IsValid(txt_re_password)) {
-                    register_re_password.setError(getString(R.string.login_invalid_password));
-                    focusView = register_re_password;
-                    cancel = true;
-                }
-
                 if (!IsEmailValid(txt_email)) {
                     register_email.setError(getString(R.string.register_invalid_email));
                     focusView = register_email;
                     cancel = true;
                 }
 
+                if (!txt_password.equals(txt_re_password)){
+
+                    register_re_password.setError(getString(R.string.register_password_re_error));
+                    focusView = register_re_password;
+                    cancel = true;
+                }
+
                 if (cancel) {
                     focusView.requestFocus();
                 } else {
+
+                    Registracija user = new Registracija(txt_username, txt_password, txt_email);
+
+                    Toast.makeText(RegisterActivity.this,
+                            "objekte: "+
+                                    "\nVartotojo vardas : " + user.getUsername()+
+                                    "\nPasswordas : " + user.getPassword() +
+                                    "\nEmailas : " + user.getEmail(),
+                            Toast.LENGTH_LONG).show();
+
                     Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                     //myIntent.putExtra("key", value); //Optional parameters
                     RegisterActivity.this.startActivity(myIntent);

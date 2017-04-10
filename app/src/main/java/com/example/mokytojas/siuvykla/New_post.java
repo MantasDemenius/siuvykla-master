@@ -83,25 +83,6 @@ public class New_post extends Activity {
 
                 if (show) {
 
-                   /* Toast.makeText(New_post.this,
-                            "Jūsų užsakymas: " +
-                                    "\nDrabužio tipas : " + String.valueOf(clothes_type.getSelectedItem()) +
-                                    "\nUžsakymų kiekis : " + String.valueOf(order.getText()) +
-                                    "\nLytis : " + String.valueOf(gender.getSelectedItem()) +
-                                    "\nKaina : " + String.valueOf(price.getText()) +
-                                    "\nSpalva : " + String.valueOf(color.getSelectedItem()) +
-                                    "\nDrabužio ilgis : " + String.valueOf(clothes_length.getText()) +
-                                    "\nDrabužio plotis : " + String.valueOf(clothes_width.getText()) +
-                                    "\nPristatymas : " + String.valueOf(delivery.getSelectedItem()),
-                            Toast.LENGTH_SHORT).show();*/
-                    cancel = true;
-                }
-
-                if (cancel) {
-                    Intent myIntent = new Intent(New_post.this, MeniuActivity.class);
-                    //myIntent.putExtra("key", value); //Optional parameters
-                    New_post.this.startActivity(myIntent);
-
                     double order_num = Double.parseDouble(order_text);
                     double price_num = Double.parseDouble(price_text);
                     double clothes_length_num = Double.parseDouble(clothes_length_text);
@@ -119,7 +100,19 @@ public class New_post extends Activity {
                                     "\nKaina : " + cl.getPrice() +
                                     "\nDrabužio ilgis : " + cl.getLength() +
                                     "\nDrabužio plotis : " + cl.getWidth(),
-                             Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();
+
+
+
+                    cancel = true;
+                }
+
+                if (cancel) {
+                    Intent myIntent = new Intent(New_post.this, MeniuActivity.class);
+                    //myIntent.putExtra("key", value); //Optional parameters
+                    New_post.this.startActivity(myIntent);
+
+
                 }
 
 
