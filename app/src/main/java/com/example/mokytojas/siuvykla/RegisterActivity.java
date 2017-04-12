@@ -9,13 +9,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends Activity {
 
+
+    private static final String REGISTER_URL = "http://venslovaitis.byethost10.com/App-siuvykla/volleyRegister.php";
+
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_EMAIL = "email";
+
     Button sign_up_button;
     private EditText register_username, register_password, register_re_password, register_email;
+    private Registracija user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +61,10 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                String txt_username = register_username.getText().toString();
-                String txt_password = register_password.getText().toString();
-                String txt_re_password = register_re_password.getText().toString();
-                String txt_email = register_email.getText().toString();
+                String txt_username = register_username.getText().toString().trim();
+                String txt_password = register_password.getText().toString().trim();
+                String txt_re_password = register_re_password.getText().toString().trim();
+                String txt_email = register_email.getText().toString().trim();
 
                 boolean cancel = false;
                 View focusView = null;
@@ -80,14 +99,16 @@ public class RegisterActivity extends Activity {
                     focusView.requestFocus();
                 } else {
 
-                    Registracija user = new Registracija(txt_username, txt_password, txt_email);
+                    user = new Registracija(txt_username, txt_password, txt_email);
 
-                    Toast.makeText(RegisterActivity.this,
+                    registerUser(user);
+
+                    /*Toast.makeText(RegisterActivity.this,
                             "objekte: "+
                                     "\nVartotojo vardas : " + user.getUsername()+
                                     "\nPasswordas : " + user.getPassword() +
                                     "\nEmailas : " + user.getEmail(),
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();*/
 
                     Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                     //myIntent.putExtra("key", value); //Optional parameters
@@ -107,7 +128,7 @@ public class RegisterActivity extends Activity {
         return matcher.matches();
     }
 
-    public static boolean IsEmailValid(String email) {
+    private boolean IsEmailValid(String email) {
         boolean isValid = false;
 
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
@@ -119,6 +140,37 @@ public class RegisterActivity extends Activity {
             isValid = true;
         }
         return isValid;
+    }
+
+    public void registerUser(final Registracija user){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(RegisterActivity.this,response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERNAME,user.getUsername());
+                params.put(KEY_PASSWORD,user.getPassword());
+                params.put(KEY_EMAIL, user.getEmail());
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 
 }
