@@ -1,7 +1,9 @@
 package com.example.mokytojas.siuvykla;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,13 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -24,16 +24,13 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends Activity {
 
 
-    private static final String REGISTER_URL = "http://venslovaitis.byethost10.com/App-siuvykla/volleyRegister.php";
+    private static final String REGISTER_URL = "http://venslovaitis.byethost10.com/App-siuvykla/register1.php";
 
-    public static final String KEY_USERNAME = "username";
-    public static final String KEY_PASSWORD = "password";
-    public static final String KEY_EMAIL = "email";
+
 
     Button sign_up_button;
     private EditText register_username, register_password, register_re_password, register_email;
     private Registracija user;
-
 
 
     @Override
@@ -61,10 +58,10 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                String txt_username = register_username.getText().toString().trim();
+                String txt_username = register_username.getText().toString().trim().toLowerCase();
                 String txt_password = register_password.getText().toString().trim();
                 String txt_re_password = register_re_password.getText().toString().trim();
-                String txt_email = register_email.getText().toString().trim();
+                String txt_email = register_email.getText().toString().trim().toLowerCase();
 
                 boolean cancel = false;
                 View focusView = null;
@@ -88,7 +85,7 @@ public class RegisterActivity extends Activity {
                     cancel = true;
                 }
 
-                if (!txt_password.equals(txt_re_password)){
+                if (!txt_password.equals(txt_re_password)) {
 
                     register_re_password.setError(getString(R.string.register_password_re_error));
                     focusView = register_re_password;
@@ -101,7 +98,7 @@ public class RegisterActivity extends Activity {
 
                     user = new Registracija(txt_username, txt_password, txt_email);
 
-                    registerUser(user);
+                    userRegistration(user);
 
                     /*Toast.makeText(RegisterActivity.this,
                             "objekte: "+
@@ -115,6 +112,8 @@ public class RegisterActivity extends Activity {
                     RegisterActivity.this.startActivity(myIntent);
                 }
 
+
+
             }
 
         });
@@ -124,7 +123,7 @@ public class RegisterActivity extends Activity {
         final String CREDENTIALS_PATTERN = "^([0-9a-zA-Z]{3,15})+$";
         Pattern pattern = Pattern.compile(CREDENTIALS_PATTERN);
 
-        Matcher matcher = pattern.matcher (credentials);
+        Matcher matcher = pattern.matcher(credentials);
         return matcher.matches();
     }
 
@@ -142,35 +141,50 @@ public class RegisterActivity extends Activity {
         return isValid;
     }
 
-    public void registerUser(final Registracija user){
+    private void userRegistration(final Registracija user) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(RegisterActivity.this,response,Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
+        //register
+        String urlSuffix = "?username="+user.getUsername()+"&password="+user.getPassword()+"&email="+user.getEmail();
+        class RegisterUser extends AsyncTask<String, Void, String> {
+
+            ProgressDialog loading;
+
+
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERNAME,user.getUsername());
-                params.put(KEY_PASSWORD,user.getPassword());
-                params.put(KEY_EMAIL, user.getEmail());
-                return params;
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(RegisterActivity.this, "Please Wait", null, true, true);
             }
 
-        };
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+            }
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+            @Override
+            protected String doInBackground(String... params) {
+                String s = params[0];
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(REGISTER_URL + s);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    con.setRequestProperty("Cookie", "__test=7a4d917e220fbf9a55cab3046bd1a3b7; expires=2038 m. sausio 1 d., penktadienis 01:55:55; path=/");
+                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
+                    String result;
+
+                    result = bufferedReader.readLine();
+
+                    return result;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }
+
+        RegisterUser ru = new RegisterUser();
+        ru.execute(urlSuffix);
     }
-
 }
