@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Siuvykla</string>
+    <string name="login_label_username">Prisijungimo vardas</string>
+    <string name="login_label_password">Slaptažodis</string>
+    <string name="login_label_logIn_button">Prisijungti</string>
+    <string name="login_invalid_username">Blogai įvestas prisijungimo vardas</string>
+    <string name="login_invalid_password">Blogai įvestas slaptažodis</string>
+    <string name="register_invalid_email">Blogai įvestas emailas</string>
+    <string name="meniu_new_post_button">Naujas įrašas</string>
+    <string name="meniu_search_button">Paieška</string>
+    <string name="new_post_add_post">Pridėkite naują įrašą</string>
+    <string name="search_write_search">Irašykite paiešką</string>
+    <string name="login_register_button">Registruotis</string>
+    <string name="register_username">Jūsų slapyvardis</string>
+    <string name="register_password">Jūsų slaptažodis</string>
+    <string name="register_repeat_password">Pakartokite slaptažodį</string>
+    <string name="register_email">Įveskite elektroninį paštą</string>
+    <string name="register_register_button">Užregistruoti</string>
+    <string name="register_password_re_error">Slaptažodžio patvirtinimas turi sutapti su slaptažodžiu</string>
+    <string name="operation_one_type_of_clothes_name">Drabužio tipas</string>
+    <string-array name="operation_one_type_of_clothes">
+        <item>Palaidinė</item>
+        <item>Kelnės</item>
+        <item>Suknelė</item>
+        <item>Marškinėliai</item>
+    </string-array>
+    <string name="operation_one_gender_name">Lytis</string>
+    <string-array name="operation_one_gender">
+        <item>Vyras</item>
+        <item>Moteris</item>
+    </string-array>
+    <string name="operation_one_color_name">Spalva</string>
+    <string-array name="operation_one_color">
+        <item>Juoda</item>
+        <item>Balta</item>
+        <item>Pilka</item>
+        <item>Raudona</item>
+        <item>Žalia</item>
+        <item>Ruda</item>
+        <item>Geltona</item>
+    </string-array>
+    <string name="operation_one_delivery_name">Pristatymas</string>
+    <string-array name="operation_one_delivery">
+        <item>Paštu</item>
+        <item>Atsiimsiu ofise</item>
+    </string-array>
+    <string name="operation_one_submit_button">Įrašyti</string>
+    <string name="operation_one_order">Užsakymų kiekis</string>
+    <string name="operation_one_price">Kaina</string>
+    <string name="operation_one_clothes_length">Drabužio ilgis</string>
+    <string name="operation_one_clothes_width">Drabužio plotis</string>
+    <string name="operation_one_error">Privalomas laukelis</string>
+</resources>
